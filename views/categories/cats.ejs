@@ -4,15 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>All Categories</title>
-  <link rel="stylesheet" href="/css/categories/categories.css">
+  <link rel="stylesheet" href="/css/categories/getcategories.css">
 </head>
 <body>
   <div class="categories-container">
     <h2>All Categories</h2>
+
+    <div class="add-category">
+      <input type="text" id="newCategoryName" placeholder="Enter category name">
+      <button id="addCategoryBtn">Add Category</button>
+    </div>
+
     <ul id="categoriesList"></ul>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="/js/categories/categories.js"></script>
+  <script src="/js/categories/getcategories.js"></script>
 </body>
 </html>

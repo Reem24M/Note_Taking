@@ -41,16 +41,11 @@ app.delete('/auth/logout',Logout)
 
 //categories render pages
 app.get('/categories',(req,res)=>{
-    res.render('/categories/categories')
+    res.render('categories/cats')
 })
-app.get('/categories',(req,res)=>{
-    res.render('/categories/addcategory')
-})
-app.get('/categories/:id',(req,res)=>{
-    res.render('/categories/deletecategory')
-})
+
 //categories routes
-app.get('/categories',GetAllCategories)
+app.get('/api/categories',GetAllCategories)
 app.post('/categories',CreateCategory)
 app.delete('/categories/:id',DeleteCategory)
 

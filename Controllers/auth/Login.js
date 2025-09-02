@@ -3,43 +3,39 @@ const { UserData } = require("../../Models/UserSchema")
 const bcrypt = require('bcrypt')
 const crypto = require('crypto');
 
-
 const LoginStart = async (req, res) => {
-    let { username, password } = req.body
-    if (!username || !password) {
-        return res.status(400).json({ error: 'Missing username or password' })
-    }
-    let user = await UserData.findOne({ username })
-    if (!user) {
-        return res.status(401).json({ error: 'user not found' })
-    }
-    let isMatch = await bcrypt.compare(password, user.password)
-    if (!isMatch) {
-        return res.status(400).json({ error: 'wrong password' })
-    }
-    if (user.otp !== null)
-        return res.status(400).send("User already logged in")
-    const accessToken = crypto.randomBytes(32).toString("hex");
+    try {
+        let { username, password } = req.body
+        if (!username || !password) {
+            return res.status(400).json({ error: 'Missing username or password' })
+        }
 
-    const newSession = new SessionData({
-        username: user.username,
-        token: accessToken,
-        role: user.role
-    });
-    await newSession.save();
+        let user = await UserData.findOne({ username })
+        if (!user) {
+            return res.status(401).json({ error: 'User not found' })
+        }
 
-    let newopt = Math.floor(100000 + Math.random() * 900000);
-    const newuser = await UserData.findOneAndUpdate(
-        { username },
-        {
-            otp: newopt,
-            otpExpiry: new Date(Date.now() + 10 * 60 * 1000)
-        },
-        { new: true }
-    )
+        let isMatch = await bcrypt.compare(password, user.password)
+        if (!isMatch) {
+            return res.status(400).json({ error: 'Wrong password' })
+        }
 
-    return res.status(200).json({ message: 'OTP sent successfully', newuser })
+        if (user.otp !== null)
+            return res.status(400).send("OTP already sent, please verify")
+
+        let newOtp = Math.floor(100000 + Math.random() * 900000)
+        user.otp = newOtp
+        user.otpExpiry = new Date(Date.now() + 10 * 60 * 1000)
+        await user.save()
+
+        return res.status(200).json({ message: 'OTP sent successfully' })
+    } catch (err) {
+        console.error("LoginStart error:", err)
+        return res.status(500).json({ error: "Server error in LoginStart" })
+    }
 }
+
+
 const LoginVerify = async (req, res) => {
     try {
         let { username, otpCode } = req.body
@@ -55,12 +51,11 @@ const LoginVerify = async (req, res) => {
             return res.status(401).send("No active OTP")
         }
 
-        // check expiry before verifying code
         if (user.otpExpiry < new Date()) {
             user.otp = null
             user.otpExpiry = null
             await user.save()
-            return res.status(401).send("OTP code expired")
+            return res.status(401).send("OTP expired")
         }
 
         otpCode = otpCode.toString().trim()
@@ -68,16 +63,26 @@ const LoginVerify = async (req, res) => {
             return res.status(401).send("Invalid OTP code")
         }
 
-        // success → reset otp
         user.otp = null
         user.otpExpiry = null
         await user.save()
 
-        let sessionuser = await SessionData.findOne({ username })
-        return res.status(200).json({ message: "Login successful", user, sessionuser })
+        const accessToken = crypto.randomBytes(32).toString("hex");
+        const newSession = new SessionData({
+            username: user.username,
+            token: accessToken,
+            role: user.role
+        });
+        await newSession.save()
+
+        return res.status(200).json({
+            message: "Login successful",
+            user,
+            token: accessToken
+        })
     } catch (err) {
-        console.error(err)
-        return res.status(500).send("Server error")
+        console.error("LoginVerify error:", err)
+        return res.status(500).json({ error: "Server error in LoginVerify" })
     }
 }
 

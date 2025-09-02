@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5af19, #f12711);
+}
+
+.categories-container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.categories-container h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.add-category {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.add-category input {
+  flex: 1;
+  padding: 0.6rem;
+  border: 1.5px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+}
+
+.add-category button {
+  padding: 0.6rem 1rem;
+  background: #f5af19;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-category button:hover {
+  background: #f12711;
+}
+
+#categoriesList {
+  list-style: none;
+}
+
+#categoriesList li {
+  background: #fafafa;
+  margin: 0.5rem 0;
+  padding: 0.7rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#categoriesList button {
+  background: #f12711;
+  border: none;
+  color: #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#categoriesList button:hover {
+  background: #c21500;
+}
