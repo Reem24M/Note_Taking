@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #fff8dc; /* light yellow */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.logout-container {
+  background-color: #ffeb3b; /* yellow */
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.logout-container h1 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.logout-container p {
+  margin-bottom: 25px;
+  color: #555;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: #fbc02d; /* darker yellow */
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #f9a825; /* even darker yellow */
+}
