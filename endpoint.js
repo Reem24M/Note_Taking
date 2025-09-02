@@ -30,7 +30,8 @@ app.get('/auth/forget-password',(req,res)=>{
 app.get('/auth/reset-password',(req,res)=>{
     res.render('auth/resetPassord')
 })
-//Auth
+
+//Auth routes
 app.post('/auth/register',Register)
 app.post('/auth/login/start',LoginStart)
 app.post('/auth/login/verify',LoginVerify)
@@ -38,7 +39,17 @@ app.post('/auth/forgot-password',ForgetPassword)
 app.post('/auth/reset-password',ResetPassword)
 app.delete('/auth/logout',Logout)
 
-//categories
+//categories render pages
+app.get('/categories',(req,res)=>{
+    res.render('/categories/categories')
+})
+app.get('/categories',(req,res)=>{
+    res.render('/categories/addcategory')
+})
+app.get('/categories/:id',(req,res)=>{
+    res.render('/categories/deletecategory')
+})
+//categories routes
 app.get('/categories',GetAllCategories)
 app.post('/categories',CreateCategory)
 app.delete('/categories/:id',DeleteCategory)

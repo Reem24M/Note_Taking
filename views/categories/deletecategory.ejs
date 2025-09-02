@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Category</title>
+  <link rel="stylesheet" href="/css/categories/deletecategory.css">
+</head>
+<body>
+  <div class="category-container">
+    <h2>Delete Category</h2>
+    <form id="deleteCategoryForm">
+      <div class="form-group">
+        <label for="categoryId">Category ID</label>
+        <input type="text" id="categoryId" name="categoryId" placeholder="Enter category ID" required>
+      </div>
+      <button type="submit" class="btn delete-btn">Delete</button>
+    </form>
+    <p id="message"></p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/js/categories/deletecategory.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Category</title>
+  <link rel="stylesheet" href="/css/categories/addcategory.css">
+</head>
+<body>
+  <div class="category-container">
+    <h2>Add Category</h2>
+    <form id="addCategoryForm">
+      <div class="form-group">
+        <label for="name">Category Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter category name" required>
+      </div>
+      <button type="submit" class="btn">Add</button>
+    </form>
+    <p id="message"></p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/js/categories/addcategory.js"></script>
+</body>
+</html>
