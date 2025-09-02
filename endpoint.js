@@ -49,10 +49,13 @@ app.get('/api/categories',GetAllCategories)
 app.post('/categories',CreateCategory)
 app.delete('/categories/:id',DeleteCategory)
 
-
-//notes
-app.get('/notes',GetAllNotes)
-app.get('/notes/:id',GetNoteById)
+//notes render pages
+app.get('/notes',(req,res)=>{
+    res.render('notes/allnotes')
+})
+//notes routes
+app.get('/api/notes',GetAllNotes)
+app.get('/api/notes/:id',GetNoteById)
 app.post('/notes',AddNote)
 app.put('/notes/:id',UpdateNote)
 app.patch('/notes/:id',UpdateNoteWithOneThing)

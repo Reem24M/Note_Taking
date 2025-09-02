@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Notes</title>
+  <link rel="stylesheet" href="/css/notes/allnotes.css">
+</head>
+<body>
+  <div class="notes-container">
+    <h2>All Notes</h2>
+
+    <div class="add-note">
+      <input type="text" id="newNoteTitle" placeholder="Note Title">
+      <textarea id="newNoteContent" placeholder="Note Content"></textarea>
+      <button id="addNoteBtn">Add Note</button>
+    </div>
+
+    <div class="get-note">
+      <input type="text" id="noteId" placeholder="Note ID">
+      <button id="getNoteBtn">Get Note by ID</button>
+    </div>
+
+    <ul id="notesList"></ul>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/js/notes/allnotes.js"></script>
+</body>
+</html>
