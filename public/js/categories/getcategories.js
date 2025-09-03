@@ -11,7 +11,7 @@ async function fetchCategories() {
     });
     console.log("this ",response);
     categoriesList.innerHTML = ""; 
-    response.data.all.forEach((category) => {
+    response.data.forEach((category) => {
       const li = document.createElement("li");
       li.textContent = category.name;
 

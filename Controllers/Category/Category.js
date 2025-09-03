@@ -10,9 +10,9 @@ const GetAllCategories=async(req,res)=>{
     let user=await SessionData.findOne({token})
     if(!user)
         return res.status(200).send("Not authenticated user")
-    let all=await CategoryData.find()
+    let all=await CategoryData.find({ownerUsername:user.username})
     if(!all) return res.status(400).send("No categories found")
-    return res.status(200).json({all})
+    return res.status(200).json(all)
 }
 const CreateCategory=async(req,res)=>{
     // check authentication

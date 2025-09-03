@@ -3,13 +3,17 @@ const { Logout } = require('./Controllers/auth/Logout')
 const { ForgetPassword, ResetPassword } = require('./Controllers/auth/Password')
 const { Register } = require('./Controllers/auth/Register')
 const { GetAllCategories, DeleteCategory, CreateCategory } = require('./Controllers/Category/Category')
+const { Home } = require('./Controllers/home')
 const { GetAllNotes, GetNoteById, AddNote, UpdateNoteWithOneThing, UpdateNote, DeleteNote } = require('./Controllers/Notes/Notes')
 const { GetProfile, ChangePassword, ChangeLSName, EnableOtp } = require('./Controllers/Profile/Profile')
 const {app}=require('./index')
 
-app.get('/',(req,res)=>{
-    res.send('Hello World!')
+//home
+app.get('/home',(req,res)=>{
+    res.render('home')
 })
+app.get('/',Home)
+
 
 //Auth render pages
 app.get('/auth/register', (req, res) => {
