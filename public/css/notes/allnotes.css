@@ -1,70 +1,112 @@
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background: linear-gradient(135deg, #f5af19, #f12711);
-
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5af19, #f12711);
 }
 
 .notes-container {
-    background: #fff;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    width: 400px;
+  width: 500px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: relative;
 }
 
-.notes-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
+.add-btn {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  background: #f1c40f;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 5%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.add-btn:hover {
+  background: #d4ac0d;
 }
 
-.add-note input,
-.add-note textarea,
-.get-note input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 6px;
-    border: 1px solid #bbb;
+.notes-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+.notes-list li {
+  padding: 10px;
+  margin-bottom: 8px;
+  border: 1px solid #f1c40f;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.notes-list li:hover {
+  background: #fff9db;
 }
 
-.add-note button,
-.get-note button,
-.notes-container button {
-    background: #f1c40f;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    color: #000;
-    font-weight: bold;
-    margin-top: 5px;
+/* مودال */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 400px;
+}
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.modal-content button {
+  width: 100%;
+  padding: 10px;
+  background: #f1c40f;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.close {
+  float: right;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.field-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 8px;
 }
 
-.add-note button:hover,
-.get-note button:hover,
-.notes-container button:hover {
-    background: #d4ac0d;
+.field-row input,
+.field-row textarea {
+  flex: 1;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 15px;
+.patch-btn {
+  background: #f1c40f;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
 }
-
-li {
-    padding: 8px;
-    margin-bottom: 8px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.patch-btn:hover {
+  background: #d4ac0d;
 }

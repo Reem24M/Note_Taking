@@ -1,133 +1,126 @@
 const notesList = document.getElementById("notesList");
-const addNoteBtn = document.getElementById("addNoteBtn");
-const newNoteTitle = document.getElementById("newNoteTitle");
-const newNoteContent = document.getElementById("newNoteContent");
-const getNoteBtn = document.getElementById("getNoteBtn");
-const noteIdInput = document.getElementById("noteId");
+
+const addNoteModal = document.getElementById("addNoteModal");
+const editNoteModal = document.getElementById("editNoteModal");
+
+let selectedNote = null;
+
+document.getElementById("openAddModal").onclick = () => addNoteModal.style.display = "flex";
+document.getElementById("closeAddModal").onclick = () => addNoteModal.style.display = "none";
+document.getElementById("closeEditModal").onclick = () => editNoteModal.style.display = "none";
+
 
 async function fetchNotes() {
   try {
-    const response = await axios.get("/api/notes", {
-      headers: { token: localStorage.getItem("token") },
+    const token = localStorage.getItem("token");
+
+    const res = await fetch("/api/notes", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "token": token
+      }
     });
-    notesList.innerHTML = "";
-    response.data.all.forEach(note => {
-      const li = document.createElement("li");
-      li.innerHTML = `<strong>${note.title}</strong>: ${note.content}`;
 
-      const delBtn = document.createElement("button");
-      delBtn.textContent = "Delete";
-      delBtn.onclick = () => deleteNote(note._id);
-      delBtn.style.marginLeft = "10px";
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(text);
+    }
 
-      const editBtn = document.createElement("button");
-      editBtn.textContent = "Edit All";
-      editBtn.onclick = () => editNoteAll(note._id);
-      editBtn.style.marginLeft = "5px";
+    const data = await res.json();
+    console.log(data.notes);
+    renderNotes(data.notes);
+  } catch (err) {
+    console.log("Error fetching notes:", err.message);
+  }
+}
 
-      const editOneBtn = document.createElement("button");
-      editOneBtn.textContent = "Edit One";
-      editOneBtn.onclick = () => editNoteOneField(note._id);
-      editOneBtn.style.marginLeft = "5px";
 
-      li.appendChild(delBtn);
-      li.appendChild(editBtn);
-      li.appendChild(editOneBtn);
-      notesList.appendChild(li);
+function renderNotes(notes) {
+  notesList.innerHTML = "";
+  notes.forEach(note => {
+    const li = document.createElement("li");
+    li.innerHTML = `<strong>${note.title}</strong> - ${note.categoryName} <button class="delete-btn">Delete</button>`;
+    const deleteBtn = li.querySelector(".delete-btn");
+    deleteBtn.onclick = async (e) => {
+      e.stopPropagation();
+      try {
+      const res = await fetch(`/notes/${note._id}`, {
+        method: "DELETE",
+        headers: {
+        "Content-Type": "application/json",
+        "token": localStorage.getItem("token")
+        }
+      });
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text);
+      }
+      fetchNotes();
+      } catch (err) {
+      alert("Error deleting note: " + err.message);
+      }
+    };
+    li.onclick = () => openEditModal(note);
+    notesList.appendChild(li);
+  });
+}
+
+document.getElementById("addNoteBtn").onclick = async () => {
+  const title = document.getElementById("noteTitle").value;
+  const categoryName = document.getElementById("categoryName").value;
+  const content = document.getElementById("noteContent").value;
+
+  if (!title || !content) return alert("Title and Content required!");
+
+  try {
+    await fetch("/notes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "token": localStorage.getItem("token")
+      },
+      body: JSON.stringify({ title, categoryName, content })
     });
-  } catch (err) {
-    console.error(err);
-    alert("Error fetching notes");
-  }
-}
 
-async function addNote() {
-  const title = newNoteTitle.value.trim();
-  const content = newNoteContent.value.trim();
-  if (!title || !content) return alert("Please enter title and content");
 
-  try {
-    const response = await axios.post(
-      "/api/notes",
-      { title, content },
-      { headers: { token: localStorage.getItem("token") } }
-    );
-    alert(response.data.message || "Note added");
-    newNoteTitle.value = "";
-    newNoteContent.value = "";
     fetchNotes();
+
+    addNoteModal.style.display = "none";
+    document.getElementById("noteTitle").value = "";
+    document.getElementById("categoryName").value = "";
+    document.getElementById("noteContent").value = "";
   } catch (err) {
-    console.error(err);
-    alert("Error adding note");
+    console.error("Error adding note:", err);
   }
+};
+
+function openEditModal(note) {
+  selectedNote = note;
+  document.getElementById("editNoteTitle").value = note.title;
+  document.getElementById("editCategoryName").value = note.categoryName;
+  document.getElementById("editNoteContent").value = note.content;
+  editNoteModal.style.display = "flex";
 }
 
-async function deleteNote(id) {
-  if (!confirm("Are you sure you want to delete this note?")) return;
+document.getElementById("saveEditBtn").onclick = async () => {
+  if (!selectedNote) return;
+
   try {
-    const response = await axios.delete(`/api/notes/${id}`, {
-      headers: { token: localStorage.getItem("token") },
+    await fetch(`/notes/${selectedNote._id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" ,"token":localStorage.getItem('token')},
+      body: JSON.stringify({
+        title: document.getElementById("editNoteTitle").value,
+        content: document.getElementById("editNoteContent").value,
+        categoryName: document.getElementById("editCategoryName").value
+      })
     });
-    alert(response.data.message || "Note deleted");
+
     fetchNotes();
+    editNoteModal.style.display = "none";
   } catch (err) {
-    console.error(err);
-    alert("Error deleting note");
+    console.error("Error updating note:", err);
   }
-}
-
-async function editNoteAll(id) {
-  const title = prompt("Enter new title:");
-  const content = prompt("Enter new content:");
-  if (!title || !content) return;
-  try {
-    const response = await axios.put(
-      `/api/notes/${id}`,
-      { title, content },
-      { headers: { token: localStorage.getItem("token") } }
-    );
-    alert(response.data.message || "Note updated");
-    fetchNotes();
-  } catch (err) {
-    console.error(err);
-    alert("Error editing note");
-  }
-}
-
-async function editNoteOneField(id) {
-  const field = prompt("Which field to edit? (title/content)").toLowerCase();
-  if (field !== "title" && field !== "content") return alert("Invalid field");
-  const value = prompt(`Enter new value for ${field}:`);
-  if (!value) return;
-  try {
-    const response = await axios.patch(
-      `/api/notes/${id}`,
-      { [field]: value },
-      { headers: { token: localStorage.getItem("token") } }
-    );
-    alert(response.data.message || "Note updated");
-    fetchNotes();
-  } catch (err) {
-    console.error(err);
-    alert("Error editing note");
-  }
-}
-
-async function getNoteById() {
-  const id = noteIdInput.value.trim();
-  if (!id) return alert("Please enter Note ID");
-  try {
-    const response = await axios.get(`/api/notes/${id}`, {
-      headers: { token: localStorage.getItem("token") },
-    });
-    alert(`Title: ${response.data.note.title}\nContent: ${response.data.note.content}`);
-  } catch (err) {
-    console.error(err);
-    alert("Error fetching note by ID");
-  }
-}
-
-addNoteBtn.addEventListener("click", addNote);
-getNoteBtn.addEventListener("click", getNoteById);
-
+};
 fetchNotes();

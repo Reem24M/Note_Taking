@@ -3,28 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Notes</title>
+  <title>Notes</title>
   <link rel="stylesheet" href="/css/notes/allnotes.css">
 </head>
 <body>
   <div class="notes-container">
-    <h2>All Notes</h2>
+    <h1>Your Notes</h1>
+    <button id="openAddModal" class="add-btn">+ Add Note</button>
 
-    <div class="add-note">
-      <input type="text" id="newNoteTitle" placeholder="Note Title">
-      <textarea id="newNoteContent" placeholder="Note Content"></textarea>
-      <button id="addNoteBtn">Add Note</button>
-    </div>
-
-    <div class="get-note">
-      <input type="text" id="noteId" placeholder="Note ID">
-      <button id="getNoteBtn">Get Note by ID</button>
-    </div>
-
-    <ul id="notesList"></ul>
+    <ul id="notesList" class="notes-list"></ul>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- Modal Add Note -->
+  <div id="addNoteModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeAddModal">&times;</span>
+      <h2>Add Note</h2>
+      <input type="text" id="noteTitle" placeholder="Note Title">
+      <input type="text" id="categoryName" placeholder="Category Name">
+      <textarea id="noteContent" placeholder="Note Content"></textarea>
+      <button id="addNoteBtn">Add</button>
+    </div>
+  </div>
+
+  <!-- Modal Edit Note -->
+  <div id="editNoteModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeEditModal">&times;</span>
+      <h2>Edit Note</h2>
+      <label for="editNoteTitle">Title</label>
+      <input type="text" id="editNoteTitle" placeholder="Note Title">
+      <label for="editCategoryName">Category</label>
+      <input type="text" id="editCategoryName" placeholder="Category Name">
+      <label for="editNoteContent">Content</label>
+      <textarea id="editNoteContent" placeholder="Note Content"></textarea>
+      <button id="saveEditBtn">Save</button>
+    </div>
+  </div>
+
   <script src="/js/notes/allnotes.js"></script>
 </body>
 </html>
