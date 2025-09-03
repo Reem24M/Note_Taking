@@ -4,21 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>All Categories</title>
+
+  <!-- External stylesheet for styling categories page -->
   <link rel="stylesheet" href="/css/categories/getcategories.css">
 </head>
 <body>
   <div class="categories-container">
+    <!-- Page Title -->
     <h2>All Categories</h2>
 
+    <!-- Add Category Section -->
     <div class="add-category">
       <input type="text" id="newCategoryName" placeholder="Enter category name">
       <button id="addCategoryBtn">Add Category</button>
     </div>
 
+    <!-- Categories List -->
     <ul id="categoriesList"></ul>
   </div>
 
+  <!-- Axios library for HTTP requests -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <!-- External JS file that handles fetching, adding and deleting categories -->
   <script src="/js/categories/getcategories.js"></script>
 </body>
 </html>

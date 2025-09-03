@@ -2,45 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
+  <!-- Axios library for API requests -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <title>Register</title>
+  <!-- Stylesheet for register page -->
   <link rel="stylesheet" href="/css/auth/register.css">
+
+  <title>Register</title>
 </head>
 <body>
   <div class="register-container">
+    <!-- Page Heading -->
     <h2>Create Account</h2>
+
+    <!-- Registration Form -->
+    <!--
+      - Submits data (username, email, password, optional first/last name)
+      - Handled by register.js script
+      - On success: account created → user notified
+    -->
     <form id="registerForm" class="register-form">
       
+      <!-- Username (required) -->
       <div class="form-group">
         <label for="username">Username *</label>
         <input type="text" id="username" name="username" required>
       </div>
 
+      <!-- Email (required) -->
       <div class="form-group">
         <label for="email">Email *</label>
         <input type="email" id="email" name="email" required>
       </div>
 
+      <!-- Password (required) -->
       <div class="form-group">
         <label for="password">Password *</label>
         <input type="password" id="password" name="password" required>
       </div>
 
+      <!-- First Name (optional) -->
       <div class="form-group">
         <label for="firstName">First Name (optional)</label>
         <input type="text" id="firstName" name="firstName">
       </div>
 
+      <!-- Last Name (optional) -->
       <div class="form-group">
         <label for="lastName">Last Name (optional)</label>
         <input type="text" id="lastName" name="lastName">
       </div>
 
+      <!-- Submit button -->
       <button type="submit" class="btn">Register</button>
     </form>
   </div>
 
+  <!-- Script to handle form submission -->
   <script src="/js/auth/register.js"></script>
 </body>
 </html>

@@ -2,30 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
+  <!-- Axios library for making API requests -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <title>Login Verify</title>
+
+  <!-- Stylesheet for login verification page -->
   <link rel="stylesheet" href="/css/auth/login_verify.css">
 </head>
 <body>
   <div class="login-container">
+    <!-- Page Heading -->
     <h2>Login Verify</h2>
+
+    <!-- Verification Form -->
+    <!--
+      - User enters their username and OTP code.
+      - On submit, handled by login_verify.js script.
+      - Data is sent to backend (/auth/login/verify).
+    -->
     <form id="loginform" class="login-form">
       
+      <!-- Username input field -->
       <div class="form-group">
         <label for="username">Username *</label>
         <input type="text" id="username" name="username" required>
       </div>
 
+      <!-- OTP (One-Time Password) input field -->
       <div class="form-group">
         <label for="otpCode">OTP *</label>
         <input type="text" id="otpCode" name="otpCode" required>
       </div>
 
+      <!-- Submit button to verify login -->
       <button type="submit" class="btn">Verify</button>
     </form>
   </div>
 
+  <!-- Script that handles OTP verification logic -->
   <script src="/js/auth/login_verify.js"></script>
 </body>
 </html>

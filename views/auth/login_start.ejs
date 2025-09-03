@@ -2,35 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
+  <!-- Axios for making API requests -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <title>Login</title>
+
+  <!-- Stylesheet for login page -->
   <link rel="stylesheet" href="/css/auth/login_start.css">
 </head>
 <body>
   <div class="login-container">
+    <!-- Page Heading -->
     <h2>Login</h2>
+
+    <!-- Login Form -->
+    <!--
+      - Contains username and password input fields.
+      - On submit, handled by login_start.js script.
+      - Data is sent to backend (/auth/login/start).
+    -->
     <form id="loginform" class="login-form">
       
+      <!-- Username input -->
       <div class="form-group">
         <label for="username">Username *</label>
         <input type="text" id="username" name="username" required>
       </div>
 
-     
-
+      <!-- Password input -->
       <div class="form-group">
         <label for="password">Password *</label>
         <input type="password" id="password" name="password" required>
       </div>
 
-     
-
+      <!-- Submit button -->
       <button type="submit" class="btn">Login</button>
     </form>
   </div>
 
-
+  <!-- Script that handles form submission -->
   <script src="/js/auth/login_start.js"></script>
 </body>
 </html>

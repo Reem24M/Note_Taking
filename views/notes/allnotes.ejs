@@ -4,46 +4,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Notes</title>
+  <!-- Link to external stylesheet for styling the notes page -->
   <link rel="stylesheet" href="/css/notes/allnotes.css">
 </head>
 <body>
+  <!-- Main container for notes page -->
   <div class="notes-container">
     <h1>Your Notes</h1>
+    <!-- Button to open the Add Note modal -->
     <button id="openAddModal" class="add-btn">+ Add Note</button>
 
+    <!-- Unordered list where notes will be rendered dynamically -->
     <ul id="notesList" class="notes-list"></ul>
   </div>
 
-  <!-- Modal Add Note -->
+  <!-- Modal: Add Note -->
+  <!-- This modal allows the user to add a new note -->
   <div id="addNoteModal" class="modal">
     <div class="modal-content">
+      <!-- Close button -->
       <span class="close" id="closeAddModal">&times;</span>
       <h2>Add Note</h2>
-      <label for="editNoteTitle">Title</label>
+      <!-- Note title input -->
+      <label for="noteTitle">Title</label>
       <input type="text" id="noteTitle" placeholder="Note Title">
-      <label for="editCategoryName">Category</label>
+      <!-- Category name input -->
+      <label for="categoryName">Category</label>
       <input type="text" id="categoryName" placeholder="Category Name">
-      <label for="editNoteContent">Content</label>
+      <!-- Note content textarea -->
+      <label for="noteContent">Content</label>
       <textarea id="noteContent" placeholder="Note Content"></textarea>
+      <!-- Button to add the new note -->
       <button id="addNoteBtn">Add</button>
     </div>
   </div>
 
-  <!-- Modal Edit Note -->
+  <!-- Modal: Edit Note -->
+  <!-- This modal allows the user to edit an existing note -->
   <div id="editNoteModal" class="modal">
     <div class="modal-content">
+      <!-- Close button -->
       <span class="close" id="closeEditModal">&times;</span>
       <h2>Edit Note</h2>
+      <!-- Note title input -->
       <label for="editNoteTitle">Title</label>
       <input type="text" id="editNoteTitle" placeholder="Note Title">
+      <!-- Category name input -->
       <label for="editCategoryName">Category</label>
       <input type="text" id="editCategoryName" placeholder="Category Name">
+      <!-- Note content textarea -->
       <label for="editNoteContent">Content</label>
       <textarea id="editNoteContent" placeholder="Note Content"></textarea>
+      <!-- Button to save changes -->
       <button id="saveEditBtn">Save</button>
     </div>
   </div>
 
+  <!-- Link to external JavaScript file that handles notes logic (fetch, add, edit, delete) -->
   <script src="/js/notes/allnotes.js"></script>
 </body>
 </html>

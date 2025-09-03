@@ -2,30 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
+  <!-- Page title and stylesheet -->
   <title>Reset Password</title>
   <link rel="stylesheet" href="/css/auth/reset_password.css">
 </head>
 <body>
   <div class="reset-container">
+    <!-- Page heading -->
     <h2>Reset Password</h2>
     <p>Please enter your new password below.</p>
 
+    <!-- Reset password form -->
+    <!--
+      - Takes new password and confirmation
+      - Handled by reset_password.js
+      - On success: password updated
+    -->
     <form id="resetForm">
+      
+      <!-- New password input -->
       <div class="form-group">
         <label for="newpassword">New Password</label>
         <input type="password" id="newpassword" name="newpassword" required placeholder="Enter new password">
       </div>
 
+      <!-- Confirm password input -->
       <div class="form-group">
         <label for="confirmpassword">Confirm Password</label>
         <input type="password" id="confirmpassword" name="confirmpassword" required placeholder="Confirm new password">
       </div>
 
+      <!-- Submit button -->
       <button type="submit" class="btn">Reset Password</button>
     </form>
   </div>
 
+  <!-- Axios for HTTP requests -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <!-- Script that handles form submission -->
   <script src="/js/auth/reset_password.js"></script>
 </body>
 </html>
