@@ -76,7 +76,6 @@ const LoginVerify = async (req, res) => {
     if (!user) {
       return res.status(404).send("User not found");
     }
-
     // Ensure OTP exists
     if (!user.otp || !user.otpExpiry) {
       return res.status(401).send("No active OTP");
