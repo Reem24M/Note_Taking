@@ -65,8 +65,12 @@ app.put('/notes/:id',UpdateNote)
 app.patch('/notes/:id',UpdateNoteWithOneThing)
 app.delete('/notes/:id',DeleteNote)
 
-//Profile
-app.get('/profile',GetProfile)
+//profile render page
+app.get('/profile',(req,res)=>{
+    res.render('profile/profile')
+})
+//Profile routes
+app.get('/api/profile',GetProfile)
 app.post('/profile/change-password',ChangePassword)
 app.post('/profile/change-first-last-name',ChangeLSName)
 app.post('/profile/enable-otp',EnableOtp)

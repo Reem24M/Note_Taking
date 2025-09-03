@@ -1,0 +1,84 @@
+/* ====== General Page ====== */
+body {
+  background: linear-gradient(135deg, #fff7e6, #ffe6b3);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ====== Card Style ====== */
+.card {
+  border: none;
+  background: #fff8e1;
+  border-left: 6px solid #ff9800;
+  transition: transform 0.2s ease-in-out;
+}
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* ====== Headings ====== */
+h2 {
+  color: #e65100;
+  font-weight: bold;
+}
+
+/* ====== Buttons ====== */
+.btn-warning {
+  background: #ffb300;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+.btn-warning:hover {
+  background: #ffa000;
+}
+
+.btn-primary {
+  background: #ff7043;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+.btn-primary:hover {
+  background: #f4511e;
+}
+
+/* ====== Modals ====== */
+.modal-content {
+  border-radius: 15px;
+  border: 2px solid #ffb300;
+  background: #fffdf5;
+}
+.modal-header {
+  background: #ffcc80;
+  border-bottom: none;
+  border-radius: 15px 15px 0 0;
+}
+.modal-title {
+  color: #e65100;
+  font-weight: 600;
+}
+.modal-footer {
+  border-top: none;
+  background: #fff8e1;
+  border-radius: 0 0 15px 15px;
+}
+
+/* ====== Inputs ====== */
+input.form-control {
+  border: 2px solid #ffe0b2;
+  border-radius: 10px;
+  padding: 10px;
+  transition: border-color 0.2s;
+}
+input.form-control:focus {
+  border-color: #ff9800;
+  box-shadow: 0 0 6px rgba(255, 152, 0, 0.5);
+}
+
+/* ====== Labels ====== */
+label.form-label {
+  color: #e65100;
+  font-weight: 500;
+}

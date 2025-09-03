@@ -55,6 +55,10 @@ const UserSchema=new mongoose.Schema({
         default:null
        
        
+    },
+    otpEnabled:{
+        type:Boolean,
+        default:false
     }
 })
 const UserData=mongoose.model('Users',UserSchema)
