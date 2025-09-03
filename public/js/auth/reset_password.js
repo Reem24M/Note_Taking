@@ -1,3 +1,18 @@
+/**
+ * Handles password reset form submission.
+ * - Selects the form with id "resetForm".
+ * - Prevents default form submission.
+ * - Gets the new password and confirm password values from the input fields.
+ * - Checks if the passwords match, otherwise shows an alert and stops execution.
+ * - Extracts the reset token from the URL query parameters.
+ * - Sends a POST request to /auth/reset-password with the new password and confirm password,
+ *   including the token in the request headers.
+ * - If the server responds with a message, shows it in an alert.
+ * - On success, alerts the user and redirects them to the login page.
+ * - Catches and logs any errors that occur during the request.
+ */
+
+
 document.getElementById("resetForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 

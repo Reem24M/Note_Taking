@@ -1,3 +1,14 @@
+/**
+ * Handles user logout when the logout button is clicked.
+ * - Waits for the DOM to be fully loaded.
+ * - Selects the logout button (if it exists).
+ * - On click:
+ *   - Sends a DELETE request to /auth/logout using axios.
+ *   - If the response is successful, shows a "Logged out successfully" alert.
+ *   - Otherwise, shows an error alert.
+ * - Catches and logs any errors during the request.
+ */
+
 document.addEventListener("DOMContentLoaded", () => {
   const logoutBtn = document.getElementById("logoutBtn");
 

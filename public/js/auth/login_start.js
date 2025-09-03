@@ -1,3 +1,12 @@
+/**
+ * Handles the login form submission.
+ * - Prevents the default form behavior to handle it via JavaScript.
+ * - Collects form data and converts it into an object.
+ * - Sends a POST request to /auth/login/start with the form data.
+ * - If the response contains an error, shows it in an alert.
+ * - If login starts successfully, shows a success message and resets the form.
+ * - Logs any unexpected errors to the console.
+*/    
   const form=document.getElementById('loginform');
     form.addEventListener('submit',async (e)=>{
       e.preventDefault();
