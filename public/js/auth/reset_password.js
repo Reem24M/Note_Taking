@@ -26,18 +26,13 @@ document.getElementById("resetForm").addEventListener("submit", async (e) => {
 
   try {
     const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get("token");
+    const token = urlParams.get("passwordResetToken");
 
     const response = await axios.post(
-      "/auth/reset-password",
+      `/auth/reset-password?passwordResetToken=${token}`,
       {
-        newpassword,
-        confirmpassword,
-      },
-      {
-        headers: {
-          token: token, 
-        },
+        newPassword:newpassword,
+        confirmPassword:confirmpassword,
       }
     );
 
@@ -47,7 +42,6 @@ document.getElementById("resetForm").addEventListener("submit", async (e) => {
       alert("Password reset successfully.");
     }
 
-    window.location.href = "/auth/login";
   } catch (err) {
     console.error(err);
     alert(err.response?.data?.message || "Error resetting password");

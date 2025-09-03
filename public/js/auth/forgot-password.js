@@ -21,7 +21,6 @@ document.getElementById("forgotForm").addEventListener("submit", async (e) => {
       alert("Reset link sent to your email.");
     }
 
-    window.location.href = "/auth/login";
   } catch (err) {
     console.error(err);
     alert(err.response?.data?.message || "Error sending reset link");
