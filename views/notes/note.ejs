@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Note Details</title>
+  <link rel="stylesheet" href="/css/notes/note.css">
+</head>
+<body>
+  <div class="notes-container">
+    <h1>Note Details</h1>
+
+    <div id="noteDetails">
+      <div class="field-row">
+        <label>Title:</label>
+        <span id="noteTitle"></span>
+        <button class="edit-field-btn" data-field="title">✏️</button>
+      </div>
+
+      <div class="field-row">
+        <label>Category:</label>
+        <span id="noteCategory"></span>
+        <button class="edit-field-btn" data-field="categoryName">✏️</button>
+      </div>
+
+      <div class="field-row">
+        <label>Content:</label>
+        <span id="noteContent"></span>
+        <button class="edit-field-btn" data-field="content">✏️</button>
+      </div>
+    </div>
+
+    <button id="editAllBtn">Edit All</button>
+    <button onclick="window.history.back()">Back</button>
+  </div>
+
+  <script src="/js/notes/note.js"></script>
+</body>
+</html>

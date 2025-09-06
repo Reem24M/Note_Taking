@@ -57,13 +57,16 @@ app.delete('/categories/:id',DeleteCategory)
 app.get('/notes',(req,res)=>{
     res.render('notes/allnotes')
 })
+app.get('/notes/:id',(req,res)=>{
+    res.render('notes/note')
+})
 //notes routes
 app.get('/api/notes',GetAllNotes)
 app.get('/api/notes/:id',GetNoteById)
-app.post('/notes',AddNote)
-app.put('/notes/:id',UpdateNote)
-app.patch('/notes/:id',UpdateNoteWithOneThing)
-app.delete('/notes/:id',DeleteNote)
+app.post('/api/notes',AddNote)
+app.put('/api/notes/:id',UpdateNote)
+app.patch('/api/notes/:id',UpdateNoteWithOneThing)
+app.delete('/api/notes/:id',DeleteNote)
 
 //profile render page
 app.get('/profile',(req,res)=>{

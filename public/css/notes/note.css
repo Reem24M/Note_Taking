@@ -1,0 +1,101 @@
+/* Reset */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #fffbea;
+  color: #4a3c16;
+}
+
+/* Container */
+.notes-container {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #fffdf5;
+  padding: 25px 30px;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(255, 140, 0, 0.15);
+  border: 2px solid #ffd166;
+}
+
+/* Page heading */
+.notes-container h1 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 28px;
+  color: #e67e22;
+  border-bottom: 2px solid #ffd166;
+  padding-bottom: 10px;
+}
+
+/* Field rows */
+.field-row {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.field-row label {
+  font-weight: 600;
+  width: 100px;
+  color: #d35400;
+}
+
+.field-row span {
+  flex: 1;
+  padding: 8px 12px;
+  background: #fff3c4;
+  border-radius: 6px;
+  min-height: 20px;
+  border: 1px solid #ffe599;
+}
+
+/* Edit icon buttons */
+.edit-field-btn {
+  margin-left: 10px;
+  border: none;
+  background: #f39c12;
+  color: white;
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.edit-field-btn:hover {
+  background: #e67e22;
+}
+
+/* Action buttons */
+#editAllBtn,
+.notes-container button[onclick] {
+  margin-top: 20px;
+  padding: 10px 16px;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Edit All */
+#editAllBtn {
+  background: #ffb347; /* orange */
+  color: white;
+  margin-right: 10px;
+}
+
+#editAllBtn:hover {
+  background: #ff9933;
+}
+
+/* Back */
+.notes-container button[onclick] {
+  background: #ffd166; /* yellow */
+  color: #4a3c16;
+}
+
+.notes-container button[onclick]:hover {
+  background: #ffcc00;
+}

@@ -43,7 +43,7 @@ const GetNoteById = async (req, res) => {
     if (!note) return res.status(404).send("Note not found")
 
     // 5. Return note
-    return res.status(200).json({ note })
+    return res.status(200).json(note)
 }
 
 // Add a new note

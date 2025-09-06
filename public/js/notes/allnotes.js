@@ -1,18 +1,14 @@
 const notesList = document.getElementById("notesList");
-
 const addNoteModal = document.getElementById("addNoteModal");
-const editNoteModal = document.getElementById("editNoteModal");
 
 let selectedNote = null;
 
 /**
  * Opens the Add Note modal when the "openAddModal" button is clicked.
  * Closes the Add Note modal when the "closeAddModal" button is clicked.
- * Closes the Edit Note modal when the "closeEditModal" button is clicked.
  */
 document.getElementById("openAddModal").onclick = () => addNoteModal.style.display = "flex";
 document.getElementById("closeAddModal").onclick = () => addNoteModal.style.display = "none";
-document.getElementById("closeEditModal").onclick = () => editNoteModal.style.display = "none";
 
 /**
  * Fetches all notes from the server.
@@ -23,13 +19,9 @@ document.getElementById("closeEditModal").onclick = () => editNoteModal.style.di
 async function fetchNotes() {
   try {
     const token = localStorage.getItem("token");
-
     const res = await fetch("/api/notes", {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "token": token
-      }
+      headers: { "Content-Type": "application/json", "token": token }
     });
 
     if (!res.ok) {
@@ -38,7 +30,7 @@ async function fetchNotes() {
     }
 
     const data = await res.json();
-    console.log(data.notes);
+    console.log("Fetched notes:", data.notes);
     renderNotes(data.notes);
   } catch (err) {
     console.log("Error fetching notes:", err.message);
@@ -51,7 +43,7 @@ async function fetchNotes() {
  * - For each note:
  *   - Creates an <li> element with the title and category.
  *   - Adds a delete button that removes the note via DELETE request.
- *   - Sets the <li> click handler to open the edit modal with note data.
+ *   - Sets the <li> click handler to redirect to note details page.
  * - Appends all notes to the notes list.
  */
 function renderNotes(notes) {
@@ -60,28 +52,27 @@ function renderNotes(notes) {
     const li = document.createElement("li");
     li.innerHTML = `<strong>${note.title}</strong> - ${note.categoryName} <button class="delete-btn">Delete</button>`;
 
+    // Delete button click handler
     const deleteBtn = li.querySelector(".delete-btn");
     deleteBtn.onclick = async (e) => {
-      e.stopPropagation();
+      e.stopPropagation(); // Prevent redirect when clicking delete
       try {
-        const res = await fetch(`/notes/${note._id}`, {
+        const res = await fetch(`/api/notes/${note._id}`, {
           method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            "token": localStorage.getItem("token")
-          }
+          headers: { "Content-Type": "application/json", "token": localStorage.getItem("token") }
         });
-        if (!res.ok) {
-          const text = await res.text();
-          throw new Error(text);
-        }
+        if (!res.ok) throw new Error(await res.text());
         fetchNotes();
       } catch (err) {
         alert("Error deleting note: " + err.message);
       }
     };
 
-    li.onclick = () => openEditModal(note);
+    // Clicking the note redirects to the details page with note ID as param
+    li.onclick = () => {
+      window.location.href = `/notes/${note._id}`;
+    };
+
     notesList.appendChild(li);
   });
 }
@@ -101,18 +92,16 @@ document.getElementById("addNoteBtn").onclick = async () => {
   if (!title || !content) return alert("Title and Content required!");
 
   try {
-    await fetch("/notes", {
+    await fetch("/api/notes", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "token": localStorage.getItem("token")
-      },
+      headers: { "Content-Type": "application/json", "token": localStorage.getItem("token") },
       body: JSON.stringify({ title, categoryName, content })
     });
 
     fetchNotes();
-
     addNoteModal.style.display = "none";
+
+    // Clear input fields
     document.getElementById("noteTitle").value = "";
     document.getElementById("categoryName").value = "";
     document.getElementById("noteContent").value = "";
@@ -121,45 +110,5 @@ document.getElementById("addNoteBtn").onclick = async () => {
   }
 };
 
-/**
- * Opens the Edit Note modal and populates it with the selected note's data.
- * - Stores the selected note in a global variable.
- * - Sets form input values (title, category, content) with the note's data.
- */
-function openEditModal(note) {
-  selectedNote = note;
-  document.getElementById("editNoteTitle").value = note.title;
-  document.getElementById("editCategoryName").value = note.categoryName;
-  document.getElementById("editNoteContent").value = note.content;
-  editNoteModal.style.display = "flex";
-}
-
-/**
- * Saves changes to an existing note.
- * - Checks if a note is selected.
- * - Sends PUT request with updated note data to /notes/:id.
- * - Refreshes the notes list and closes the modal on success.
- */
-document.getElementById("saveEditBtn").onclick = async () => {
-  if (!selectedNote) return;
-
-  try {
-    await fetch(`/notes/${selectedNote._id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json", "token": localStorage.getItem("token") },
-      body: JSON.stringify({
-        title: document.getElementById("editNoteTitle").value,
-        content: document.getElementById("editNoteContent").value,
-        categoryName: document.getElementById("editCategoryName").value
-      })
-    });
-
-    fetchNotes();
-    editNoteModal.style.display = "none";
-  } catch (err) {
-    console.error("Error updating note:", err);
-  }
-};
-
-// Initial load of notes
+// Initial load of notes when the page loads
 fetchNotes();

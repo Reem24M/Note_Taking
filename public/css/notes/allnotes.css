@@ -4,6 +4,7 @@ body {
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #f5af19, #f12711);
+  font-family: Arial, sans-serif;
 }
 
 .notes-container {
@@ -11,7 +12,7 @@ body {
   background: #fff;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   position: relative;
 }
 
@@ -27,6 +28,7 @@ body {
   font-size: 1.2rem;
   font-weight: bold;
 }
+
 .add-btn:hover {
   background: #d4ac0d;
 }
@@ -36,6 +38,7 @@ body {
   padding: 0;
   margin-top: 20px;
 }
+
 .notes-list li {
   padding: 10px;
   margin-bottom: 8px;
@@ -44,27 +47,31 @@ body {
   cursor: pointer;
   transition: 0.3s;
 }
+
 .notes-list li:hover {
   background: #fff9db;
 }
 
-/* مودال */
 .modal {
   display: none;
   position: fixed;
   z-index: 1000;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
   justify-content: center;
   align-items: center;
 }
+
 .modal-content {
   background: #fff;
   padding: 20px;
   border-radius: 12px;
   width: 400px;
 }
+
 .modal-content input,
 .modal-content textarea {
   width: 100%;
@@ -73,6 +80,7 @@ body {
   border: 1px solid #ccc;
   border-radius: 6px;
 }
+
 .modal-content button {
   width: 100%;
   padding: 10px;
@@ -82,31 +90,9 @@ body {
   font-weight: bold;
   cursor: pointer;
 }
+
 .close {
   float: right;
   font-size: 1.5rem;
   cursor: pointer;
-}
-.field-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
-  gap: 8px;
-}
-
-.field-row input,
-.field-row textarea {
-  flex: 1;
-}
-
-.patch-btn {
-  background: #f1c40f;
-  border: none;
-  padding: 8px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1rem;
-}
-.patch-btn:hover {
-  background: #d4ac0d;
 }
